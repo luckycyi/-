@@ -14,6 +14,10 @@ import './css/index.css'
 // 引入MUI框架 
 import './lib/mui/css/mui.min.css'
 
+// 引入bootstrap框架样式
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'open-iconic/font/css/open-iconic-bootstrap.css'
+
 // 引入路由模块
 import router from './router.js'
 

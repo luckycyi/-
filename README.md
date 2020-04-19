@@ -19,3 +19,7 @@
  * 点击 ... 的推送 提交远程仓库
 
 ## 制作首页App组件
+1. 使用 Mint-ui 完成 Header 头部
+2. 使用 MUI框架 完成 footer 底部
+    + 
+3. 在中间放置一个 router-view 来展示路由组件 
