@@ -21,5 +21,12 @@
 ## 制作首页App组件
 1. 使用 Mint-ui 完成 Header 头部
 2. 使用 MUI框架 完成 footer 底部
-    + 
+    + 注意这里MUI没有购物车图标，需要导入bootstrap
+    + bootstrap 使用3.x.x版本，4以后图标被分离了
+    + 需要在配置文件中配置 {test:/\.(ttf|eot|svg|woff|woff2|otf)$/, use: 'url-loader'}
+    + 类名添加 mui-icon 可以保证和MUI格式一致
 3. 在中间放置一个 router-view 来展示路由组件 
+    + 创建路由模块，引入路由
+    + 引入Mint-ui中轮播图
+        - 安装 vue-resource
+        - 导入 vue-resource  获取ajax数据

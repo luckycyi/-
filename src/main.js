@@ -4,9 +4,26 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
+// 导入 vue-resource 获取ajax数据
+import VueResource from 'vue-resource'
+Vue.use(VueResource)
+
+// 设置请求根目录
+Vue.http.options.root = 'http://www.liulongbin.top:3005'
+
+//引入格式化时间的插件
+import moment from 'moment'
+// 定义全局的时间过滤器
+Vue.filter('dataFrom', function (dataStr, pattern = "YYYY-MM-DD HH:mm:ss") { 
+    return moment(dataStr).format(pattern)
+ }) 
+
 // 引入mint-ui组件
-import { Header } from 'mint-ui';
-Vue.component(Header.name, Header);
+import { Header, Swipe, SwipeItem, Button } from 'mint-ui'
+Vue.component(Header.name, Header)
+Vue.component(Swipe.name, Swipe)
+Vue.component(SwipeItem.name, SwipeItem)
+Vue.component(Button.name, Button);
 
 // 清楚公共样式
 import './css/index.css'
@@ -16,7 +33,6 @@ import './lib/mui/css/mui.min.css'
 
 // 引入bootstrap框架样式
 import 'bootstrap/dist/css/bootstrap.min.css'
-import 'open-iconic/font/css/open-iconic-bootstrap.css'
 
 // 引入路由模块
 import router from './router.js'
@@ -27,7 +43,8 @@ import app from './App.vue'
 const vm = new Vue({
     el: '#app',
     data: {},
-    methods: {},
+    methods: {
+    },
     render: c => c(app),
     router
 })
