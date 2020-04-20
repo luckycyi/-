@@ -26,7 +26,7 @@
         <span class="mui-tab-label">会员</span>
       </router-link>
       <router-link class="mui-tab-item" to="/shopcar">
-        <span class="mui-icon glyphicon glyphicon-heart"></span>
+        <span class="mui-icon glyphicon glyphicon-shopping-cart"></span>
         <span class="mui-tab-label">购物车</span>
       </router-link>
       <router-link class="mui-tab-item" to="/search">
