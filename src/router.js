@@ -17,6 +17,8 @@ import PhotoInfo from './components/photo/PhotoInfo.vue'
 
 // home商品列表
 import GoodsList from './components/goods/GoodsList.vue'
+import GetDesc from './components/goods/GetDesc.vue'
+
 
 
 // 创建路由对象
@@ -31,7 +33,8 @@ var router = new VueRouter({
        { path: '/home/newslist/:id', component: NewsInfo },
        { path: '/home/photolist', component: PhotoList },
        { path: '/home/photolist/:id', component: PhotoInfo },
-       { path: '/home/goodslist', component: GoodsList }
+       { path: '/home/goodslist', component: GoodsList },
+       { path: '/home/goodslist/getdesc', component: GetDesc }
     ],
     linkActiveClass: 'mui-active'
 })

@@ -65,7 +65,6 @@ export default {
       this.$http.get("api/getimages/" + cateID).then(result => {
         if (result.body.status === 0) {
           this.cates = result.body.message;
-          console.log(this.cates);
         }
       });
     }
