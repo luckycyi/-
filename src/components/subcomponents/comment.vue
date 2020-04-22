@@ -1,8 +1,8 @@
 <template>
     <div class="comment-module">
         <h3>发表评论</h3>
-        <textarea name="" id="" cols="30" rows="5"></textarea>
-        <mt-button type="primary" size="large">发表评论</mt-button>
+        <textarea name="" id="" cols="30" rows="5" v-model="msg"></textarea>
+        <mt-button type="primary" size="large" @click="postComment">发表评论</mt-button>
 
         <div class="cmt-list">
             <div class="cmt-item" v-for="(item, i) in comments" :key="item.add_time">
@@ -25,7 +25,8 @@ export default {
     data() {
         return {
             pageIndex: 1,
-            comments: []
+            comments: [],
+            msg: ''
         }
     },
     created() {
@@ -45,6 +46,28 @@ export default {
         getMore() {
             this.pageIndex++
             this.getComments()
+        },
+        postComment() {
+            
+            if(this.msg.trim().length === 0) {
+                return Toast('请输入内容!')
+            }
+            this.$http.post('api/postcomment/'+ this.$route.params.id, {
+                content: this.msg.trim()
+            })
+            .then(result => {
+                if(result.body.status === 0) {
+                    let cmt = {
+                        user_name: "匿名函数",
+                        add_time: Date.now(),
+                        content: this.msg.trim()
+                    }
+                    this.comments.unshift(cmt)
+                    this.msg = ""
+                }
+            })
+            .catch((e) => {})
+                
         }
     },
     props: ["id"]

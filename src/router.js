@@ -11,7 +11,12 @@ import NewsList from './components/news/NewsList.vue'
 // NewsList列表点击跳转到详情页面
 import NewsInfo from './components/news/NewsInfo.vue'
 
+// home页面图片分享
+import PhotoList from './components/photo/PhotoList.vue'
+import PhotoInfo from './components/photo/PhotoInfo.vue'
 
+// home商品列表
+import GoodsList from './components/goods/GoodsList.vue'
 
 
 // 创建路由对象
@@ -23,7 +28,10 @@ var router = new VueRouter({
        { path: '/search', component: SearchContainer },
        { path: '/shopcar', component: ShopcarContainer },
        { path: '/home/newslist', component: NewsList },
-       { path: '/home/newslist/:id', component: NewsInfo }
+       { path: '/home/newslist/:id', component: NewsInfo },
+       { path: '/home/photolist', component: PhotoList },
+       { path: '/home/photolist/:id', component: PhotoInfo },
+       { path: '/home/goodslist', component: GoodsList }
     ],
     linkActiveClass: 'mui-active'
 })
