@@ -9,6 +9,7 @@
           :class="['mui-control-item', item.id == 0 ? ' mui-active' : '']"
           v-for="item in list"
           :key="item.id"
+          @tap="getPhotoId(item.id)"
         >{{ item.title }}</a>
       </div>
     </div>
@@ -28,7 +29,7 @@
 
 <script>
 // 区域滚动事件需要格式化
-import mui from "../../lib/mui/js/mui.js";
+import mui from "../../lib/mui/js/mui.js"
 
 import { Toast } from "mint-ui";
 
