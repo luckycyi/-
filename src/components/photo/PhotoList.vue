@@ -53,19 +53,19 @@ export default {
   },
   methods: {
     getAllCategory() {
-      this.$http.get("api/getimgcategory").then(result => {
-        if (result.body.status === 0) {
-          result.body.message.unshift({ title: "全部", id: 0 });
-          this.list = result.body.message;
+      this.axios.get("api/getimgcategory").then(result => {
+        if (result.data.status === 0) {
+          result.data.message.unshift({ title: "全部", id: 0 });
+          this.list = result.data.message;
         } else {
           Toast("读取分类失败！");
         }
       });
     },
     getPhotoId(cateID) {
-      this.$http.get("api/getimages/" + cateID).then(result => {
-        if (result.body.status === 0) {
-          this.cates = result.body.message;
+      this.axios.get("api/getimages/" + cateID).then(result => {
+        if (result.data.status === 0) {
+          this.cates = result.data.message;
         }
       });
     }

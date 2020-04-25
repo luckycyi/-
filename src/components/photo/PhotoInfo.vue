@@ -42,19 +42,19 @@ export default {
   },
   methods: {
     getImgList() {
-      this.$http.get("api/getimageInfo/" + this.id).then(result => {
-        this.photoinfo = result.body.message[0];
+      this.axios.get("api/getimageInfo/" + this.id).then(result => {
+        this.photoinfo = result.data.message[0];
       });
     },
     getThumImg() {
-      this.$http.get("api/getthumimages/" + this.id).then(result => {
-        if (result.body.status === 0) {
-          result.body.message.forEach(item => {
+      this.axios.get("api/getthumimages/" + this.id).then(result => {
+        if (result.data.status === 0) {
+          result.data.message.forEach(item => {
             item.w = 600;   //设置以大图浏览时的宽度
             item.h = 400; 
             item.msrc = item.src
           });
-          this.slide1 = result.body.message;
+          this.slide1 = result.data.message;
         }
       });
     },

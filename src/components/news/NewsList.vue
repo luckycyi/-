@@ -28,10 +28,10 @@ export default {
     },
     methods: {
         getNewsList() {
-            this.$http.get('api/getnewslist')
+            this.axios.get('api/getnewslist')
             .then(result => {
-                if(result.body.status === 0) {
-                    this.newslist = result.body.message
+                if(result.data.status === 0) {
+                    this.newslist = result.data.message
                 }else{
                     TOast('读取新闻列表失败!')
                 }

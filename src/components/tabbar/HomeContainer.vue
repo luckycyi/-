@@ -1,11 +1,6 @@
 <template>
   <div>
-    <!-- 使用轮播图 使用 Mint-ui -->
-    <mt-swipe :auto="4000">
-      <mt-swipe-item v-for="item in lunbotuList" :key="item.id">
-        <img :src="item.img">
-      </mt-swipe-item>
-    </mt-swipe>
+    <swiper :lunbotuList="lunbotuList" :isfull="true"></swiper>
 
     <!-- 6宫格 使用MUI框架-->
     <ul class="mui-table-view mui-grid-view mui-grid-9">
@@ -50,6 +45,8 @@
 </template>
 
 <script>
+import swiper from '../subcomponents/swiper.vue'
+
 export default {
   data() {
     return {
@@ -61,11 +58,11 @@ export default {
   },
   methods: {
     getLunbotu() {
-      this.$http
+      this.axios
         .get("api/getlunbo")
         .then(result => {
-          if (result.body.status === 0) {
-            this.lunbotuList = result.body.message;
+          if (result.data.status === 0) {
+            this.lunbotuList = result.data.message;
           } else {
             Toast({
               message: "轮播加载失败...",
@@ -76,29 +73,14 @@ export default {
         })
         .catch(e => {});
     }
+  },
+  components: {
+    swiper
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.mint-swipe {
-  height: 200px;
-  .mint-swipe-item {
-    &:nth-child(1) {
-      background-color: red;
-    }
-    &:nth-child(2) {
-      background-color: pink;
-    }
-    &:nth-child(3) {
-      background-color: blue;
-    }
-    img {
-      width: 100%;
-      height: 100%;
-    }
-  }
-}
 .mui-grid-9 {
   background: #fff;
   border: none;

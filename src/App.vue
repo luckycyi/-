@@ -3,7 +3,7 @@
     <!-- header 头部部分 -->
     <mt-header fixed title="云购物" class="header-size" style="font-size: 18px;">
       <router-link to="/" slot="left">
-        <mt-button icon="back"></mt-button>
+        <mt-button icon="back" @click="goback"></mt-button>
       </router-link>
       <mt-button icon="more" slot="right"></mt-button>
     </mt-header>
@@ -21,12 +21,13 @@
       </router-link>
       <router-link class="mui-tab-item-lib" to="/member">
         <span class="mui-icon mui-icon-contact">
-          <span class="mui-badge">9</span>
         </span>
         <span class="mui-tab-label">会员</span>
       </router-link>
       <router-link class="mui-tab-item-lib" to="/shopcar">
-        <span class="mui-icon glyphicon glyphicon-shopping-cart"></span>
+        <span class="mui-icon glyphicon glyphicon-shopping-cart">
+          <span class="mui-badge" id="badge">{{ $store.getters.getAllCount }}</span>
+        </span>
         <span class="mui-tab-label">购物车</span>
       </router-link>
       <router-link class="mui-tab-item-lib" to="/search">
@@ -38,7 +39,13 @@
 </template>
 
 <script>
-
+export default {
+  methods: {
+    goback() {
+      this.$router.go(-1)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -90,4 +97,5 @@
 .header-size {
   z-index: 99;
 }
+
 </style>

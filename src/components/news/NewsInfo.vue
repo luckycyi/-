@@ -29,11 +29,11 @@ export default {
     },
     methods: {
         getNewsInfo() {
-            this.$http.get('api/getnew/'+this.id)
+            this.axios.get('api/getnew/'+this.id)
                 .then(result => {
                    
-                    if(result.body.status === 0) {
-                        this.newsInfo = result.body.message[0]
+                    if(result.data.status === 0) {
+                        this.newsInfo = result.data.message[0]
                     }
                 })
                 .catch((e) => {})

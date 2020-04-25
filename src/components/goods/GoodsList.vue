@@ -1,32 +1,22 @@
 <template>
   <div class="goodslist">
     <ul class="goods">
-      <router-link to="/home/goodslist/getdesc" class="goods-item" v-for="item in listP" :key="item.id">
+      <li class="goods-item" v-for="item in listP" :key="item.id" @click="goDetail(item.id)">
         <img :src="item.img_url" alt />
         <h3>{{ item.title }}</h3>
         <div class="info">
           <p class="price">
-            <span class="now">￥889</span>&nbsp;&nbsp;
-            <span class="old">￥999</span>
+            <span class="now">￥{{ item.sell_price }}</span>&nbsp;&nbsp;
+            <span class="old">￥{{ item.market_price }}</span>
           </p>
           <p class="hot">
             <span>热卖中</span>
-            <span>剩下10件</span>
+            <span>剩下{{ item.stock_quantity }}件</span>
           </p>
         </div>
-      </router-link>
+      </li>
     </ul>
-
-    <div class="mui-content-padded">
-      <ul class="mui-pager">
-        <li class="mui-disabled">
-          <a @click="DelPage">上一页</a>
-        </li>
-        <li>
-          <a href="#" @click="addPage">下一页</a>
-        </li>
-      </ul>
-    </div>
+    <mt-button type="primary" size="large" plain @click="addPage">加载更多...</mt-button>
   </div>
 </template>
 
@@ -42,83 +32,22 @@ export default {
   created() {
     this.getGoodsPhoto();
   },
-  mounted() {
-    this.refresh();
-  },
   methods: {
       addPage() {
           ++this.number
           this.getGoodsPhoto()
       },
-       DelPage() {
-           if(this.number === 0) {
-               return 
-           }
-          --this.number
-          this.getGoodsPhoto()
-      },
-    getGoodsPhoto() {
-      this.$http.get("api/getgoods?pageindex=" + this.number).then(result => {
-        if (result.body.status === 0) {
-          this.listP = result.body.message;
+      getGoodsPhoto() {
+      this.axios.get("api/getgoods?pageindex=" + this.number).then(result => {
+        if (result.data.status === 0) {
+          this.listP = this.listP.concat(result.data.message)
         }
-      });
+      })
     },
-    refresh() {
-      mui.init({
-        swipeBack: true //启用右滑关闭功能
-      });
-      (function($) {
-        $(".mui-pagination").on("tap", "a", function() {
-          var li = this.parentNode;
-          var classList = li.classList;
-          if (
-            !classList.contains("mui-active") &&
-            !classList.contains("mui-disabled")
-          ) {
-            var active = li.parentNode.querySelector(".mui-active");
-            if (classList.contains("mui-previous")) {
-              //previous
-              if (active) {
-                var previous = active.previousElementSibling;
-                console.log("previous", previous);
-                if (previous && !previous.classList.contains("mui-previous")) {
-                  $.trigger(previous.querySelector("a"), "tap");
-                } else {
-                  classList.add("mui-disabled");
-                }
-              }
-            } else if (classList.contains("mui-next")) {
-              //next
-              if (active) {
-                var next = active.nextElementSibling;
-                if (next && !next.classList.contains("mui-next")) {
-                  $.trigger(next.querySelector("a"), "tap");
-                } else {
-                  classList.add("mui-disabled");
-                }
-              }
-            } else {
-              //page
-              active.classList.remove("mui-active");
-              classList.add("mui-active");
-              var page = parseInt(this.innerText);
-              var previousPageElement = li.parentNode.querySelector(
-                ".mui-previous"
-              );
-              var nextPageElement = li.parentNode.querySelector(".mui-next");
-              previousPageElement.classList.remove("mui-disabled");
-              nextPageElement.classList.remove("mui-disabled");
-              if (page <= 1) {
-                previousPageElement.classList.add("mui-disabled");
-              } else if (page >= 5) {
-                nextPageElement.classList.add("mui-disabled");
-              }
-            }
-          }
-        });
-      })(mui);
+    goDetail(id) {
+        this.$router.push({ name: 'goodsinfo', params: { id }})
     }
+   
   }
 };
 </script>

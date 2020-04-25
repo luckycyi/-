@@ -17,7 +17,9 @@ import PhotoInfo from './components/photo/PhotoInfo.vue'
 
 // home商品列表
 import GoodsList from './components/goods/GoodsList.vue'
-import GetDesc from './components/goods/GetDesc.vue'
+import GoodsInfo from './components/goods/GoodsInfo.vue'
+import GoodstDesc from './components/goods/GoodsDesc.vue'
+import GoodsComment from './components/goods/GoodsComment.vue'
 
 
 
@@ -34,7 +36,9 @@ var router = new VueRouter({
        { path: '/home/photolist', component: PhotoList },
        { path: '/home/photolist/:id', component: PhotoInfo },
        { path: '/home/goodslist', component: GoodsList },
-       { path: '/home/goodslist/getdesc', component: GetDesc }
+       { path: '/home/goodsinfo/:id', component: GoodsInfo, name: 'goodsinfo' },
+       { path: '/home/goodsdesc/:id', component: GoodstDesc, name: 'goodsdesc' },
+       { path: '/home/goodscomment/:id', component: GoodsComment, name: 'goodscomment' }
     ],
     linkActiveClass: 'mui-active'
 })
